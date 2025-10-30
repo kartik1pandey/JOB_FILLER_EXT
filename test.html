@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Test Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      color: #2d3748;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      color: #718096;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .alert {
+      background: #fef5e7;
+      border-left: 4px solid #f39c12;
+      padding: 15px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+      color: #7d6608;
+    }
+
+    .alert strong {
+      color: #f39c12;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    .form-section h2 {
+      color: #667eea;
+      font-size: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #4a5568;
+      font-size: 14px;
+    }
+
+    label .required {
+      color: #e53e3e;
+    }
+
+    input,
+    textarea {
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 2px solid #e2e8f0;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #667eea;
+      color: white;
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      background: #5a6fd8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+
+    .btn-secondary:hover {
+      background: #cbd5e0;
+    }
+
+    .instructions {
+      background: #f7fafc;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      border-left: 4px solid #667eea;
+    }
+
+    .instructions h3 {
+      color: #2d3748;
+      margin-bottom: 10px;
+    }
+
+    .instructions ol {
+      margin-left: 20px;
+      color: #4a5568;
+      line-height: 1.8;
+    }
+
+    .instructions ol li {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Test Job Application Form</h1>
+    <p class="subtitle">Use this form to test the Job Application Assistant auto-fill feature</p>
+
+    <div class="instructions">
+      <h3>📝 How to Test Auto-Fill:</h3>
+      <ol>
+        <li>Make sure you've added your personal information in the extension</li>
+        <li>Click the extension icon in your Chrome toolbar</li>
+        <li>Click the "Auto-Fill Form" button</li>
+        <li>Watch as the fields below are automatically filled!</li>
+      </ol>
+    </div>
+
+    <div class="alert">
+      <strong>⚠️ Note:</strong> This is a test form for demonstration purposes. It won't actually submit anywhere.
+    </div>
+
+    <form id="testApplicationForm" onsubmit="return handleSubmit(event)">
+      <!-- Personal Information Section -->
+      <div class="form-section">
+        <h2>Personal Information</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First Name <span class="required">*</span></label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name <span class="required">*</span></label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location (City, State)</label>
+            <input type="text" id="location" name="location" placeholder="e.g., San Francisco, CA">
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Links Section -->
+      <div class="form-section">
+        <h2>Professional Links</h2>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="portfolio">Portfolio Website</label>
+            <input type="url" id="portfolio" name="portfolio" placeholder="https://yourwebsite.com">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="linkedin">LinkedIn Profile</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Information Section -->
+      <div class="form-section">
+        <h2>Additional Information</h2>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="coverLetter">Cover Letter / Why are you interested?</label>
+            <textarea id="coverLetter" name="coverLetter" placeholder="Tell us why you'd be a great fit..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alternative Field Names (to test different patterns) -->
+      <div class="form-section">
+        <h2>Alternative Field Names (Testing Different Patterns)</h2>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Should auto-fill with first + last name">
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" name="mobile">
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="website">Personal Website</label>
+            <input type="url" id="website" name="website">
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Buttons -->
+      <div class="button-group">
+        <button type="submit" class="btn-primary">Submit Application</button>
+        <button type="reset" class="btn-secondary">Clear Form</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(event.target);
+      const data = {};
+      
+      for (let [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+      
+      console.log('Form Data:', data);
+      
+      alert('✅ Form submitted successfully!\n\nThis is just a test form. Check the browser console to see the submitted data.');
+      
+      return false;
+    }
+
+    // Add visual feedback when form is filled
+    document.querySelectorAll('input, textarea').forEach(field => {
+      field.addEventListener('input', function() {
+        if (this.value) {
+          this.style.borderColor = '#48bb78';
+        } else {
+          this.style.borderColor = '#e2e8f0';
+        }
+      });
+    });
+
+    // Log when page loads
+    console.log('Test form loaded and ready for auto-fill testing!');
+    console.log('Click the extension icon and try "Auto-Fill Form"');
+  </script>
+</body>
+</html>

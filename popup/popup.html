@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header>
+      <h1>🎯 Job Assistant</h1>
+      <div class="status" id="status">Ready</div>
+    </header>
+    
+    <main>
+      <!-- Quick Actions -->
+      <section class="section quick-actions">
+        <h3>🚀 Quick Actions</h3>
+        <button id="extractJD" class="btn-primary">
+          📄 Extract Job Description
+        </button>
+        <button id="autoFill" class="btn-secondary" disabled>
+          ✏️ Auto-Fill Form
+        </button>
+        <button id="viewResume" class="btn-secondary">
+          📝 Resume Editor
+        </button>
+      </section>
+
+      <!-- Personal Info Summary -->
+      <section class="section personal-info">
+        <h3>👤 Personal Info</h3>
+        <div class="info-summary">
+          <div class="info-item">
+            <span class="label">Name:</span>
+            <span id="displayName">Not set</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Email:</span>
+            <span id="displayEmail">Not set</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Status:</span>
+            <span id="dataCompleteness">0% complete</span>
+          </div>
+        </div>
+        <button id="editPersonalInfo" class="btn-outline">Edit Personal Info</button>
+      </section>
+
+      <!-- Data Management -->
+      <section class="section data-management">
+        <h3>💾 Data</h3>
+        <div class="button-group">
+          <button id="exportData" class="btn-outline">Export Data</button>
+          <button id="importData" class="btn-outline">Import Data</button>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-number" id="workExpCount">0</span>
+            <span class="stat-label">Work Experiences</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="educationCount">0</span>
+            <span class="stat-label">Education</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="applicationsCount">0</span>
+            <span class="stat-label">Applications</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Applications -->
+      <section class="section recent-apps" id="recentAppsSection" style="display: none;">
+        <h3>📋 Recent Applications</h3>
+        <div id="recentApplicationsList" class="applications-list"></div>
+      </section>
+
+      <!-- Settings -->
+      <section class="section settings">
+        <h3>⚙️ Settings</h3>
+        <label class="checkbox-label">
+          <input type="checkbox" id="autoExtract"> Auto-extract job descriptions
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="showSuggestions"> Show AI suggestions
+        </label>
+        <button id="clearHistory" class="btn-text">Clear Application History</button>
+      </section>
+    </main>
+  </div>
+
+  <!-- Personal Info Modal -->
+  <div id="personalInfoModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Personal Information</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="modalFirstName">First Name *</label>
+            <input type="text" id="modalFirstName" required>
+          </div>
+          <div class="form-group">
+            <label for="modalLastName">Last Name *</label>
+            <input type="text" id="modalLastName" required>
+          </div>
+          <div class="form-group">
+            <label for="modalEmail">Email *</label>
+            <input type="email" id="modalEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="modalPhone">Phone</label>
+            <input type="tel" id="modalPhone">
+          </div>
+          <div class="form-group full-width">
+            <label for="modalLocation">Location</label>
+            <input type="text" id="modalLocation" placeholder="City, Country">
+          </div>
+          <div class="form-group full-width">
+            <label for="modalPortfolio">Portfolio URL</label>
+            <input type="url" id="modalPortfolio" placeholder="https://">
+          </div>
+          <div class="form-group full-width">
+            <label for="modalLinkedin">LinkedIn URL</label>
+            <input type="url" id="modalLinkedin" placeholder="https://linkedin.com/in/username">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="savePersonalInfo" class="btn-primary">Save Information</button>
+        <button id="cancelPersonalInfo" class="btn-outline">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

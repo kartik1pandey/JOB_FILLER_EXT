@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Editor - Job Application Assistant</title>
+  <link rel="stylesheet" href="resume-editor.css">
+</head>
+<body>
+  <div class="resume-editor">
+    <header class="editor-header">
+      <h1>📝 Resume Editor</h1>
+      <div class="header-actions">
+        <button id="backToPopup" class="btn-outline">← Back</button>
+        <button id="exportResume" class="btn-primary">Export Resume</button>
+      </div>
+    </header>
+
+    <main class="editor-main">
+      <div class="editor-sidebar">
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-section="personal">Personal Info</button>
+          <button class="nav-item" data-section="experience">Work Experience</button>
+          <button class="nav-item" data-section="education">Education</button>
+          <button class="nav-item" data-section="skills">Skills</button>
+          <button class="nav-item" data-section="projects">Projects</button>
+          <button class="nav-item" data-section="preview">Preview</button>
+        </nav>
+
+        <!-- Resume Statistics -->
+        <div class="resume-stats">
+          <h4>Resume Score</h4>
+          <div class="score-circle">
+            <span id="resumeScore">0%</span>
+          </div>
+          <div class="stat-details">
+            <div class="stat-item">
+              <span>Experience:</span>
+              <span id="expScore">0</span>
+            </div>
+            <div class="stat-item">
+              <span>Skills:</span>
+              <span id="skillsScore">0</span>
+            </div>
+            <div class="stat-item">
+              <span>Education:</span>
+              <span id="eduScore">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-content">
+        <!-- Personal Info Section -->
+        <section id="personal-section" class="content-section active">
+          <h2>Personal Information</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="resumeFirstName">First Name *</label>
+              <input type="text" id="resumeFirstName" required>
+            </div>
+            <div class="form-group">
+              <label for="resumeLastName">Last Name *</label>
+              <input type="text" id="resumeLastName" required>
+            </div>
+            <div class="form-group">
+              <label for="resumeEmail">Email *</label>
+              <input type="email" id="resumeEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="resumePhone">Phone</label>
+              <input type="tel" id="resumePhone">
+            </div>
+            <div class="form-group full-width">
+              <label for="resumeLocation">Location</label>
+              <input type="text" id="resumeLocation" placeholder="City, Country">
+            </div>
+            <div class="form-group full-width">
+              <label for="resumePortfolio">Portfolio URL</label>
+              <input type="url" id="resumePortfolio" placeholder="https://">
+            </div>
+            <div class="form-group full-width">
+              <label for="resumeLinkedin">LinkedIn URL</label>
+              <input type="url" id="resumeLinkedin" placeholder="https://linkedin.com/in/username">
+            </div>
+            <div class="form-group full-width">
+              <label for="resumeSummary">Professional Summary</label>
+              <textarea id="resumeSummary" rows="4" placeholder="Brief overview of your professional background and key skills..."></textarea>
+            </div>
+          </div>
+          <div class="section-actions">
+            <button id="savePersonal" class="btn-primary">Save Personal Info</button>
+          </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section id="experience-section" class="content-section">
+          <h2>Work Experience</h2>
+          <div id="experienceList" class="items-list">
+            <!-- Work experience items will be loaded here -->
+          </div>
+          <button id="addExperience" class="btn-outline">+ Add Work Experience</button>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education-section" class="content-section">
+          <h2>Education</h2>
+          <div id="educationList" class="items-list">
+            <!-- Education items will be loaded here -->
+          </div>
+          <button id="addEducation" class="btn-outline">+ Add Education</button>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills-section" class="content-section">
+          <h2>Skills</h2>
+          <div class="skills-container">
+            <div class="skills-input">
+              <input type="text" id="skillInput" placeholder="Add a skill (e.g., JavaScript, Project Management)">
+              <button id="addSkill" class="btn-primary">Add Skill</button>
+            </div>
+            <div id="skillsList" class="skills-tags">
+              <!-- Skills tags will be loaded here -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects-section" class="content-section">
+          <h2>Projects</h2>
+          <div id="projectsList" class="items-list">
+            <!-- Project items will be loaded here -->
+          </div>
+          <button id="addProject" class="btn-outline">+ Add Project</button>
+        </section>
+
+        <!-- Preview Section -->
+        <section id="preview-section" class="content-section">
+          <h2>Resume Preview</h2>
+          <div class="preview-actions">
+            <button id="generatePreview" class="btn-primary">Generate Preview</button>
+            <button id="exportPDF" class="btn-outline">Export as PDF</button>
+          </div>
+          <div id="resumePreview" class="resume-preview">
+            <!-- Resume preview will be generated here -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Work Experience Modal -->
+  <div id="experienceModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="experienceModalTitle">Add Work Experience</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="modalJobTitle">Job Title *</label>
+            <input type="text" id="modalJobTitle" required>
+          </div>
+          <div class="form-group">
+            <label for="modalCompany">Company *</label>
+            <input type="text" id="modalCompany" required>
+          </div>
+          <div class="form-group">
+            <label for="modalLocation">Location</label>
+            <input type="text" id="modalLocation">
+          </div>
+          <div class="form-group">
+            <label for="modalStartDate">Start Date *</label>
+            <input type="month" id="modalStartDate" required>
+          </div>
+          <div class="form-group">
+            <label for="modalEndDate">End Date</label>
+            <input type="month" id="modalEndDate">
+            <label class="checkbox-label">
+              <input type="checkbox" id="modalCurrentJob"> Currently working here
+            </label>
+          </div>
+          <div class="form-group full-width">
+            <label for="modalDescription">Description *</label>
+            <textarea id="modalDescription" rows="4" required placeholder="Describe your responsibilities and achievements..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveExperience" class="btn-primary">Save Experience</button>
+        <button id="cancelExperience" class="btn-outline">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../storage/storage-manager.js"></script>
+  <script src="resume-editor.js"></script>
+</body>
+</html>
